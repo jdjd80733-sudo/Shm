@@ -1,5 +1,0 @@
-python-telegram-bot==20.7
-faster-whisper==0.10.0
-googletrans==4.0.0rc1
-gTTS==2.4.0
-yt-dlp==2024.1.0
