@@ -1,0 +1,6 @@
+python-telegram-bot==20.7
+groq
+googletrans==4.0.0rc1
+gTTS
+yt-dlp
+requests
