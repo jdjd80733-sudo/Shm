@@ -1,6 +1,8 @@
 import os
 import re
 import subprocess
+import threading
+from http.server import HTTPServer, BaseHTTPRequestHandler
 from telegram import Update
 from telegram.ext import Application, MessageHandler, filters, ContextTypes
 from faster_whisper import WhisperModel
@@ -8,7 +10,13 @@ from googletrans import Translator
 from gtts import gTTS
 import yt_dlp
 
-BOT_TOKEN = "8874256208:AAHvYFBZLK5cGGOa8NUVfKwrnMO4nqVh8y8"
+BOT_TOKEN = os.environ.get("BOT_TOKEN", "8874256208:AAHvYFBZLK5cGGOa8NUVfKwrnMO4nqVh8y8")
+
+def run_server():
+    server = HTTPServer(("0.0.0.0", 8080), BaseHTTPRequestHandler)
+    server.serve_forever()
+
+threading.Thread(target=run_server, daemon=True).start()
 
 print("⏳ جاري تحميل موديل Whisper...")
 model = WhisperModel("base", device="cpu", compute_type="int8")
